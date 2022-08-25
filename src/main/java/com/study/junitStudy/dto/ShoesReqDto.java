@@ -2,8 +2,6 @@ package com.study.junitStudy.dto;
 
 import com.study.junitStudy.repository.Shoes;
 
-import javax.persistence.Column;
-//test시에는 굳이..필요없음. 그냥 바로 객체 생성해서 하자
 public class ShoesReqDto {
 
     private String shoesBrandName;

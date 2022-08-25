@@ -8,7 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 
 
-@Setter
+
 @Getter
 @Entity
 public class Shoes {
@@ -43,5 +43,13 @@ public class Shoes {
         this.shoesSize = shoesSize;
         this.shoesPrice = shoesPrice;
         this.shoesDate = shoesDate;
+    }
+
+    public void shoesUpdate(Shoes shoes){
+        this.shoesBrandName = shoes.getShoesBrandName();
+        this.shoesName = shoes.getShoesName();
+        this.shoesSize = shoes.getShoesSize();
+        this.shoesPrice = shoes.getShoesPrice();
+        this.shoesDate = shoes.getShoesDate();
     }
 }
