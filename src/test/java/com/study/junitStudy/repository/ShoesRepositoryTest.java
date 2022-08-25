@@ -2,11 +2,14 @@ package com.study.junitStudy.repository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -42,7 +45,7 @@ class ShoesRepositoryTest {
 
     }
 
-
+    @Order(1)
     @Test
     @DisplayName("신발등록이 되는지 확인")
     public void 신발등록(){
@@ -72,7 +75,7 @@ class ShoesRepositoryTest {
 
 
     }
-
+    @Order(2)
     @Test
     public void 신발리스트(){
         //given
@@ -96,8 +99,8 @@ class ShoesRepositoryTest {
 
 
     }
-
-
+    @Sql("classpath:database/shoseInit.sql")
+    @Order(3)
     @Test
     public void 신발하나조회(){
 
@@ -122,5 +125,50 @@ class ShoesRepositoryTest {
 
 
     }
+    @Sql("classpath:database/shoseInit.sql")
+    @Order(4)
+    @Test
+    public void 신발삭제(){
+
+        //given
+        int shoesId =1;
+
+        //when
+        shoesRepository.deleteById(shoesId);
+
+        //then
+        Optional<Shoes> shoesEntity = shoesRepository.findById(shoesId);
+        assertFalse(shoesEntity.isPresent());
+
+    }
+    @Sql("classpath:database/shoseInit.sql")
+    @Order(5)
+    @Test
+    public void 신발수정(){
+        //given
+        String shoesName ="테일윈드";//->원래는 나이키
+        int shoesSize = 270;
+        String shoesBrandName="나이키";
+        int shoesPrice =200000;
+
+        Shoes ShoesEntity = Shoes.builder()
+                .id(1)
+                .shoesName(shoesName)
+                .shoesSize(shoesSize)
+                .shoesPrice(shoesPrice)
+                .shoesBrandName(shoesBrandName)
+                .build();
+        //when
+        shoesRepository.save(ShoesEntity);
+
+        //then
+
+        assertEquals(shoesName,ShoesEntity.getShoesName());
+        assertEquals(shoesSize,ShoesEntity.getShoesSize());
+        assertEquals(shoesBrandName,ShoesEntity.getShoesBrandName());
+        assertEquals(shoesPrice,ShoesEntity.getShoesPrice());
+
+    }
+
 
 }
