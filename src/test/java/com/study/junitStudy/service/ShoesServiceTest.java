@@ -47,7 +47,7 @@ class ShoesServiceTest {
         when(shoesRepository.save(any())).thenReturn(shoesReqDto.toEntity());
 
         //when
-        ShoesResDto shoesResDto = shoesService.신발등록(shoesReqDto);
+        ShoesResDto shoesResDto = shoesService.addShoes(shoesReqDto);
 
         //then
         assertThat(shoesResDto.getShoesSize()).isEqualTo(shoesReqDto.getShoesSize());
@@ -67,7 +67,7 @@ class ShoesServiceTest {
         when(shoesRepository.findAll()).thenReturn(shoes);
 
         //when
-       List<ShoesResDto> shoesList = shoesService.신발목록조회();
+       List<ShoesResDto> shoesList = shoesService.findShoesList();
         System.out.println(shoesList.get(0).getShoesSize());
         //then
         assertThat(shoesList.get(0).getShoesName()).isEqualTo(shoes.get(0).getShoesName());
@@ -93,7 +93,7 @@ class ShoesServiceTest {
 
         //when
 
-        ShoesResDto shoesOne= shoesService.신발한건조회(shoseId);
+        ShoesResDto shoesOne= shoesService.findShoesOne(shoseId);
 
         //then
         assertThat(shoes.getShoesSize()).isEqualTo(shoesOne.getShoesSize());
@@ -121,7 +121,7 @@ class ShoesServiceTest {
 
         //when
 
-        ShoesResDto shoesEntity = shoesService.신발수정하기(shoesReqDto,shoseId);
+        ShoesResDto shoesEntity = shoesService.modifyShoesOne(shoesReqDto,shoseId);
         //then
 
         assertThat(shoesEntity.getShoesName()).isEqualTo(shoesReqDto.getShoesName());

@@ -20,7 +20,7 @@ public class ShoesService {
 
 
     @Transactional(rollbackFor = RuntimeException.class)
-    public ShoesResDto 신발등록(ShoesReqDto shoesReqDto){
+    public ShoesResDto addShoes(ShoesReqDto shoesReqDto){
 
         Shoes shoesEntity = shoesRepository.save(shoesReqDto.toEntity());
         return new ShoesResDto().toDto(shoesEntity);
@@ -28,27 +28,27 @@ public class ShoesService {
 
 
     @Transactional(readOnly = true)
-    public List<ShoesResDto> 신발목록조회(){
+    public List<ShoesResDto> findShoesList(){
     List<Shoes> shoesList = shoesRepository.findAll();
 
     return shoesList.stream().map(sL-> new ShoesResDto().toDto(sL)).collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
-    public ShoesResDto 신발한건조회(int id){
+    public ShoesResDto findShoesOne(int id){
         return new ShoesResDto().toDto(shoesRepository.findById(id).orElseThrow(()->new IllegalArgumentException("존재하지않는 아이디입니다")));
 
 
     }
     @Transactional(rollbackFor = RuntimeException.class)
-    public void 신발삭제(int id){
+    public void removeShoes(int id){
 
         shoesRepository.deleteById(id);
 
     }
     //void 타입으로 해도되지만 test를 위해 타입변경.
     @Transactional(rollbackFor = RuntimeException.class)
-    public ShoesResDto 신발수정하기(ShoesReqDto dto, int id){
+    public ShoesResDto modifyShoesOne(ShoesReqDto dto, int id){
         Shoes shoesEntity = shoesRepository.findById(id).orElseThrow(()->new IllegalArgumentException("해당 아이디가 없습니다"));
         shoesEntity.shoesUpdate(dto);
         return new ShoesResDto().toDto(shoesEntity);
