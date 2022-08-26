@@ -41,15 +41,16 @@ public class ShoesService {
 
     }
     @Transactional(rollbackFor = RuntimeException.class)
-    public void 신발삭제하기(int id){
+    public void 신발삭제(int id){
 
         shoesRepository.deleteById(id);
 
     }
-
+    //void 타입으로 해도되지만 test를 위해 타입변경.
     @Transactional(rollbackFor = RuntimeException.class)
-    public void 신발수정하기(ShoesReqDto dto, int id){
+    public ShoesResDto 신발수정하기(ShoesReqDto dto, int id){
         Shoes shoesEntity = shoesRepository.findById(id).orElseThrow(()->new IllegalArgumentException("해당 아이디가 없습니다"));
-        shoesEntity.shoesUpdate(shoesEntity);
+        shoesEntity.shoesUpdate(dto);
+        return new ShoesResDto().toDto(shoesEntity);
     }
 }

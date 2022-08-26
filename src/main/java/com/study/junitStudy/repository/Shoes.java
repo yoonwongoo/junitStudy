@@ -1,6 +1,7 @@
 package com.study.junitStudy.repository;
 
 
+import com.study.junitStudy.dto.ShoesReqDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -45,11 +46,10 @@ public class Shoes {
         this.shoesDate = shoesDate;
     }
 
-    public void shoesUpdate(Shoes shoes){
-        this.shoesBrandName = shoes.getShoesBrandName();
-        this.shoesName = shoes.getShoesName();
-        this.shoesSize = shoes.getShoesSize();
-        this.shoesPrice = shoes.getShoesPrice();
-        this.shoesDate = shoes.getShoesDate();
+    public void shoesUpdate(ShoesReqDto shoesReqDto){
+        this.shoesBrandName = shoesReqDto.getShoesBrandName();
+        this.shoesName = shoesReqDto.getShoesName();
+        this.shoesSize = shoesReqDto.getShoesSize();
+        this.shoesPrice = shoesReqDto.getShoesPrice();
     }
 }
