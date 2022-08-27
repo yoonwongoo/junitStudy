@@ -4,12 +4,12 @@ package com.study.junitStudy.repository;
 import com.study.junitStudy.dto.ShoesReqDto;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 
-
+@NoArgsConstructor //jpa에는 entity가 붙은 곳에는 기본생성자가 필요하다
 @Getter
 @Entity
 public class Shoes {

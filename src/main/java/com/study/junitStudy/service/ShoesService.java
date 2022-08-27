@@ -6,12 +6,14 @@ import com.study.junitStudy.dto.ShoesResDto;
 import com.study.junitStudy.repository.Shoes;
 import com.study.junitStudy.repository.ShoesRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class ShoesService {
@@ -30,7 +32,7 @@ public class ShoesService {
     @Transactional(readOnly = true)
     public List<ShoesResDto> findShoesList(){
     List<Shoes> shoesList = shoesRepository.findAll();
-
+        shoesList.forEach(s-> System.out.println(s.getShoesName()));
     return shoesList.stream().map(sL-> new ShoesResDto().toDto(sL)).collect(Collectors.toList());
     }
 
@@ -41,7 +43,7 @@ public class ShoesService {
 
     }
     @Transactional(rollbackFor = RuntimeException.class)
-    public void removeShoes(int id){
+    public void removeShoesOne(int id){
 
         shoesRepository.deleteById(id);
 
