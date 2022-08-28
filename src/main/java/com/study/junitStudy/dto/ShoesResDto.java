@@ -4,7 +4,7 @@ import com.study.junitStudy.repository.Shoes;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-
+@NoArgsConstructor
 @Getter
 public class ShoesResDto {
     private String shoesBrandName;
@@ -15,8 +15,7 @@ public class ShoesResDto {
 
     private int shoesPrice;
 
-    public ShoesResDto() {
-    }
+
 
     public ShoesResDto toDto(Shoes shoes){
         this.shoesBrandName= shoes.getShoesBrandName();

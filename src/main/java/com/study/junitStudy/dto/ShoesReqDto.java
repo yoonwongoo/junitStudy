@@ -3,9 +3,12 @@ package com.study.junitStudy.dto;
 import com.study.junitStudy.repository.Shoes;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @Getter
 public class ShoesReqDto {
+    private int id;
 
     private String shoesBrandName;
 
@@ -26,7 +29,8 @@ public class ShoesReqDto {
     }
 
     @Builder
-    public ShoesReqDto(String shoesBrandName, String shoesName, int shoesSize, int shoesPrice) {
+    public ShoesReqDto(int id,String shoesBrandName, String shoesName, int shoesSize, int shoesPrice) {
+        this.id = id;
         this.shoesBrandName = shoesBrandName;
         this.shoesName = shoesName;
         this.shoesSize = shoesSize;

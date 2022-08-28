@@ -19,6 +19,8 @@ import java.util.List;
 public class ShoesApiController {
 
     private final ShoesService shoesService;
+
+
     @ApiOperation(value="신발의 정보를 저장", notes = "신발의 정보를 저장합니다.")
     @PostMapping("/shoes")
     public ResponseEntity<ShoesResDto> shoesAdd(@RequestBody ShoesReqDto shoesReqDto){
@@ -51,9 +53,9 @@ public class ShoesApiController {
     }
     @ApiOperation(value="신발의 정보를 삭제",notes = "신발의 ID값을 이용하여 신발을 삭제합니다")
     @DeleteMapping("/shoes/{shoesId}")
-    public ResponseEntity<?> shoesRemove(@PathVariable int shoesId){
+    public ResponseEntity<String> shoesRemove(@PathVariable int shoesId){
         shoesService.removeShoesOne(shoesId);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<String>(shoesService.removeShoesOne(shoesId),HttpStatus.OK);
     }
 
 }
